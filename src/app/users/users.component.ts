@@ -20,4 +20,12 @@ export class UsersComponent implements OnInit {
         error => console.log(error)
       );
   }
+
+  deleteUser(id:number):void {
+    this.dataApiService.deleteUser(id)
+      .subscribe(
+        result => console.log(result),
+        err => console.log(err)
+      );
+  }
 }

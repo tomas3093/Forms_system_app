@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -12,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppBootstrapModule } from './app-bootstrap.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataApiService } from './data-api.service';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { DataApiService } from './data-api.service';
     HomeComponent,
     UsersComponent,
     NotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,11 +45,16 @@ import { DataApiService } from './data-api.service';
         component: ProfileComponent
       },
       {
+        path: 'signup',
+        component: SignupComponent
+      },
+      {
         path: '**',
         component: NotFoundComponent
       }
     ]),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [DataApiService],
   bootstrap: [AppComponent]

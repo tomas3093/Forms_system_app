@@ -1,0 +1,51 @@
+
+<div [hidden]="submitted">
+  <h1>Sign up</h1>
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    <div class="form-group">
+      <label for="fieldUsername">Username: </label>
+      <input type="text" class="form-control" id="fieldUsername" placeholder="Enter your username"
+             required [(ngModel)]="model.username" name="username">
+    </div>
+
+    <div class="form-group">
+      <label for="fieldEmail">Email: </label>
+      <input type="email" class="form-control" id="fieldEmail" aria-describedby="emailHelp"
+             placeholder="Enter email" required [(ngModel)]="model.email" name="email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="fieldPassword">Password: </label>
+      <input type="password" class="form-control" id="fieldPassword" placeholder="Password"
+             required [(ngModel)]="model.password" name="password">
+    </div>
+<!--
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+      <label class="form-check-label" for="exampleCheck1"> I agree with privacy policy.</label>
+    </div>
+    -->
+    <button type="submit" class="btn btn-primary" [disabled]="!signupForm.form.valid">Submit</button>
+  </form>
+</div>
+
+
+<div [hidden]="!submitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">Username</div>
+    <div class="col-xs-9  pull-left">{{ model.username }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Email</div>
+    <div class="col-xs-9 pull-left">{{ model.email }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Password</div>
+    <div class="col-xs-9 pull-left">{{ model.password }}</div>
+  </div>
+  <br>
+  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+</div>
+

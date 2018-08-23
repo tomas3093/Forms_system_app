@@ -14,7 +14,20 @@ export class DataApiService {
     return this.http.get<IUser[]>('http://localhost:3000/api/users');
   }
 
-  getUser(id:number): Observable<IUser> {
+  getUser(id: number): Observable<IUser> {
     return this.http.get<IUser>('http://localhost:3000/api/user/' + id);
+  }
+
+  // TODO
+  addUser(user: IUser) {
+
+  }
+
+  modifyUser(user: IUser) {
+
+  }
+
+  deleteUser(id: number): Observable<Object> {
+    return this.http.delete('http://localhost:3000/api/user/' + id);
   }
 }

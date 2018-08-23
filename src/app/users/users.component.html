@@ -1,11 +1,23 @@
-<p>
-  users works!
-</p>
+<h2>Users</h2>
 
-<ul>
-  <li *ngFor="let user of users">
-    <a [routerLink]="['/user', user.user_id]">
-      {{user.username}}
-    </a>
-  </li>
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Email</th>
+      <th>Registered</th>
+      <th>Last login</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td><a [routerLink]="['/user', user.user_id]">{{ user.username }}</a></td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.registered }}</td>
+      <td>{{ user.last_login }}</td>
+      <td><a href="/users" (click)="deleteUser(user.user_id)"><i class="fas fa-times fa-2x"></i></a> </td>
+    </tr>
+  </tbody>
+</table>

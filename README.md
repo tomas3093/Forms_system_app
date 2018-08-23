@@ -2,6 +2,9 @@
 FORMS APP
 =
 
-TODO LIST
+##TODO LIST
 
-- 
+* users put, post, delete functionality
+* input forms
+* everything else... (:
+
