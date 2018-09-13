@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {IForm, IFormOption, IFormQuestion, IFormQuestionData} from '../../my_classes/dataTypes';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-form-editor',
@@ -36,7 +35,8 @@ export class FormEditorComponent implements OnInit {
   /**
    * Method is invoked when clicked button 'Add question' in form editor.
    * If question fields are not empty, new question is created and added with all its
-   * options to list of questions.
+   * options to list of questions. If we are trying to add question with seq. number which
+   * already exists, question will be updated.
    */
   addQuestionFunction() {
 
@@ -46,8 +46,22 @@ export class FormEditorComponent implements OnInit {
 
         let data = { question: q, options: this.options };
         Object.assign(data.question, this.questionData);    //deep copy
-        data.question.sequence_number = this.questions.length;
-        this.questions.push(data);
+
+        // Edit existing question
+        if (data.question.sequence_number !== null && data.question.sequence_number < this.questions.length) {
+           for (let item of this.questions) {
+             if (item.question.sequence_number === data.question.sequence_number) {
+               Object.assign(item, data);   // Assign data to question list
+               break;
+             }
+           }
+        }
+
+        // Add new question to the end of the list
+        else {
+          data.question.sequence_number = this.questions.length;
+          this.questions.push(data);
+        }
       }
 
       // Close question editor
@@ -63,8 +77,6 @@ export class FormEditorComponent implements OnInit {
       // Enable question editor
       this.questionEditorEnabled = true;
     }
-
-    console.log(this);
   }
 
 
@@ -80,7 +92,7 @@ export class FormEditorComponent implements OnInit {
 
   /**
    * Removes question from current list of created questions
-   * @param {number} sequence_number
+   * @param {number} sequence_number - question number
    */
   deleteQuestion(sequence_number: number): void {
     if (this.questions.length > 0 && sequence_number < this.questions.length) {
@@ -97,8 +109,8 @@ export class FormEditorComponent implements OnInit {
 
 
   /**
-   * Opens question editor with particular question
-   * @param {number} sequence_number
+   * Opens question editor with data of particular question
+   * @param {number} sequence_number - question number
    */
   editQuestion(sequence_number: number): void {
     if (this.questions.length > 0 && sequence_number < this.questions.length) {

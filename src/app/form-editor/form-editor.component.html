@@ -24,8 +24,8 @@
         <tr *ngFor="let q of questions">
           <td>{{ q.question.sequence_number + 1 }}</td>
           <td>{{ q.question.text_value }}</td>
-          <td><button class="btn-info" (click)="editQuestion(q.question.sequence_number)"><i class="fas fa-pencil-alt fa-2x"></i></button></td>
-          <td><button class="btn-danger" (click)="deleteQuestion(q.question.sequence_number)"><i class="fas fa-times fa-2x"></i></button></td>
+          <td><button class="btn-info btn-sm" (click)="editQuestion(q.question.sequence_number)"><i class="fas fa-pencil-alt fa-lg"></i></button></td>
+          <td><button class="btn-danger btn-sm" (click)="deleteQuestion(q.question.sequence_number)"><i class="fas fa-times fa-lg"></i></button></td>
         </tr>
       </tbody>
     </table>
