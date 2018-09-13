@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataApiService } from './data-api.service';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import {FormEditorComponent} from './form-editor/form-editor.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SignupComponent } from './signup/signup.component';
     NotFoundComponent,
     ProfileComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    FormEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -49,12 +51,17 @@ import { SignupComponent } from './signup/signup.component';
         component: SignupComponent
       },
       {
+        path: 'editor',
+        component: FormEditorComponent
+      },
+      {
         path: '**',
         component: NotFoundComponent
       }
     ]),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DataApiService],
   bootstrap: [AppComponent]

@@ -18,13 +18,12 @@ export class DataApiService {
     return this.http.get<IUser>('http://localhost:3000/api/user/' + id);
   }
 
-  // TODO
-  addUser(user: IUser) {
-
+  addUser(user: IUser): Observable<Object> {
+    return this.http.put('http://localhost:3000/api/user', user);
   }
 
-  modifyUser(user: IUser) {
-
+  modifyUser(user: IUser): Observable<Object> {
+    return this.http.post('http://localhost:3000/api/user', user);
   }
 
   deleteUser(id: number): Observable<Object> {

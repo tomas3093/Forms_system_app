@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -12,7 +13,10 @@ import {CollapseModule} from 'ngx-bootstrap';
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule, CollapseModule, CommonModule]
 })

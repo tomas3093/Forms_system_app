@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {IUser} from '../../my_classes/dataTypes';
+import {DataApiService} from '../data-api.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,28 +10,42 @@ import {IUser} from '../../my_classes/dataTypes';
 })
 export class SignupComponent implements OnInit {
 
+  enteredData: IUser;
   submitted = false;
-  model: IUser;
+  submitError = false;
 
-  constructor() {
-    this.model = {
-      user_id: 1,
-      username: 'Ivan',
+
+  constructor(private dataApiService: DataApiService) {
+    this.enteredData = {
+      user_id: null,
+      username: null,
+      password: null,
+      registered: null,
       last_login: null,
-      email: 'ivan@cremlin.ru',
+      email: null,
       birthdate: null,
       country: null,
       name: null,
-      password: 'qewq',
-      registered: null,
-      sex: null
-    }
+      sex: 'u'
+    };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void { }
 
   onSubmit() {
-    this.submitted = true;
+
+    this.dataApiService.addUser(this.enteredData)
+      .subscribe(
+        result => {
+          console.log(result);
+          this.submitted = true;
+          this.submitError = false;
+        },
+        err => {
+          console.log(err);
+          this.submitted = true;
+          this.submitError = err.status !== 200;
+        }
+      );
   }
 }
