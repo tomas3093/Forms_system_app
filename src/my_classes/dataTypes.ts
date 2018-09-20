@@ -3,7 +3,7 @@
 /**
  * Database entity User
  */
-export interface IUser {
+export class IUser {
   user_id: number;
   username: string;
   password: string;
@@ -15,6 +15,20 @@ export interface IUser {
   sex: string;
   country: string;
   birthdate: string;
+
+  constructor() {
+    this.user_id = null;
+    this.username = '';
+    this.password = '';
+    this.email = '';
+    this.registered = '';
+    this.last_login = '';
+
+    this.name = '';
+    this.sex = '';
+    this.country = '';
+    this.birthdate = '';
+  }
 }
 
 
@@ -69,7 +83,7 @@ export class IFormOption {
   constructor() {
     this.option_id = null;
     this.form_question_id = null;
-    this.option_value = 'Option1';
+    this.option_value = '';
     this.sequence_number = null;
 
     this.option_note = '';

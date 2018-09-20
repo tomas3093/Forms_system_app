@@ -10,11 +10,13 @@
 
   <!-- EXISTING QUESTIONS -->
   <div [hidden]="questions.length === 0">
+    <h2>Questions</h2>
     <table class="table">
       <thead>
         <tr>
           <th>No.</th>
           <th>Question</th>
+          <th>Move up</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -24,6 +26,7 @@
         <tr *ngFor="let q of questions">
           <td>{{ q.question.sequence_number + 1 }}</td>
           <td>{{ q.question.text_value }}</td>
+          <td><button class="btn-default btn-sm" (click)="moveUpQuestion(q.question.sequence_number)"><i class="fas fa-chevron-up fa-lg"></i></button></td>
           <td><button class="btn-info btn-sm" (click)="editQuestion(q.question.sequence_number)"><i class="fas fa-pencil-alt fa-lg"></i></button></td>
           <td><button class="btn-danger btn-sm" (click)="deleteQuestion(q.question.sequence_number)"><i class="fas fa-times fa-lg"></i></button></td>
         </tr>
@@ -40,34 +43,36 @@
     </div>
 
 
+    <!-- EXISTING OPTIONS -->
+    <div [hidden]="options.length === 0">
+      <h3>Options</h3>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>No.</th>
+          <th>Option</th>
+          <th>Note</th>
+          <th>Move up</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let option of options">
+          <td>{{ option.sequence_number + 1 }}</td>
+          <td>{{ option.option_value }}</td>
+          <td>{{ option.option_note }}</td>
+          <td><button class="btn-default btn-sm" (click)="moveUpOption(option.sequence_number)"><i class="fas fa-chevron-up fa-lg"></i></button></td>
+          <td><button class="btn-default btn-sm" (click)="editOption(option.sequence_number)"><i class="fas fa-pencil-alt fa-lg"></i></button></td>
+          <td><button class="btn-danger btn-sm" (click)="deleteOption(option.sequence_number)"><i class="fas fa-times fa-lg"></i></button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- OPTION EDITOR -->
     <div [hidden]="!optionEditorEnabled">
-
-      <!-- EXISTING OPTIONS -->
-      <div [hidden]="options.length === 0">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>No.</th>
-            <th>Option</th>
-            <th>Note</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr *ngFor="let option of options">
-            <td>{{ option.sequence_number + 1 }}</td>
-            <td>{{ option.option_value }}</td>
-            <td>{{ option.option_note }}</td>
-            <td><a href="#" (click)="editOption(option.sequence_number)"><i class="fas fa-pencil-alt fa-2x"></i></a></td>
-            <td><a href="#" (click)="deleteOption(option.sequence_number)"><i class="fas fa-times fa-2x"></i></a></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Option"
                required [(ngModel)]="optionData.option_value" name="formOptionText">
@@ -76,7 +81,9 @@
 
 
     <div class="btn-group">
-      <button type="button" class="btn btn-primary" (click)="addOptionFunction()" [disabled]="questionData.text_value === ''">
+      <button type="button" class="btn btn-primary"
+              (click)="addOptionFunction()"
+              [hidden]="questionData.text_value === ''">
         <i class="fas fa-plus-circle"></i> Add option
       </button>
     </div>
@@ -84,7 +91,9 @@
 
 
   <div class="btn-group">
-    <button type="button" class="btn btn-primary" (click)="addQuestionFunction()" [disabled]="formData.name === ''">
+    <button type="button" class="btn btn-primary"
+            (click)="addQuestionFunction()"
+            [disabled]="formData.name === ''">
       <i class="fas fa-plus-circle"></i> Add question
     </button>
   </div>

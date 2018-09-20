@@ -16,7 +16,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(private route: ActivatedRoute, private dataApiService: DataApiService) {  }
+  constructor(private route: ActivatedRoute, private dataApiService: DataApiService) {
+    this.user = new IUser();
+  }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
