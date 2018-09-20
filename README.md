@@ -4,13 +4,15 @@ FORMS APP
 
 ##TODO LIST
 
-* form editor - options editor
-* users log in autentication
+* form editor - add option type dropdown list
+* form editor - submit and sync with database
+* forms preview with proper option components
+* image options
+* log in system, authentication
 * everything else... (:
 
 
 ##Known bugs
 
-* Question editor - after submit of edited question it 
-appears as new one at the end of the list
+* non
 
