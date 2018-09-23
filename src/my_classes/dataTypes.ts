@@ -1,5 +1,4 @@
 
-// TODO Convert to class
 /**
  * Database entity User
  */
