@@ -94,8 +94,13 @@ export class IFormOption {
  * Database entity FormQuestionType
  */
 export class IFormQuestionType {
-  question_type_id: number = null;
-  type_name: string = '';
+  question_type_id: number;
+  type_name: string;
+
+  constructor() {
+    this.question_type_id = null;
+    this.type_name = '';
+  }
 }
 
 

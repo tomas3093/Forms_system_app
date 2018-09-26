@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {IForm, IFormOption, IFormQuestion, IFormQuestionData} from '../../my_classes/dataTypes';
+import {IForm, IFormOption, IFormQuestion, IFormQuestionData, IFormQuestionType} from '../../my_classes/dataTypes';
+import {DataApiService} from '../data-api.service';
 
 @Component({
   selector: 'app-form-editor',
@@ -18,7 +19,10 @@ export class FormEditorComponent implements OnInit {
   questionEditorEnabled: boolean;
   optionEditorEnabled : boolean;
 
-  constructor() {
+  questionTypes: IFormQuestionType[]; // Array of all question types
+
+  constructor(private dataApiService: DataApiService) {
+
     this.formData = new IForm();
     this.questionData = new IFormQuestion();
     this.optionData = new IFormOption();
@@ -28,9 +32,18 @@ export class FormEditorComponent implements OnInit {
 
     this.questionEditorEnabled = false;
     this.optionEditorEnabled  = false;
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    // Ajax query for question types
+    this.dataApiService.getQuestionTypes()
+      .subscribe(
+        result => this.questionTypes = result,
+        error => console.log(error)
+      )
+  }
 
 
   /**

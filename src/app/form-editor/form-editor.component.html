@@ -15,6 +15,7 @@
       <thead>
         <tr>
           <th>No.</th>
+          <th>Type</th>
           <th>Question</th>
           <th>Move up</th>
           <th>Edit</th>
@@ -25,6 +26,7 @@
       <tbody>
         <tr *ngFor="let q of questions">
           <td>{{ q.question.sequence_number + 1 }}</td>
+          <td>{{ q.question.question_type_id }}</td>
           <td>{{ q.question.text_value }}</td>
           <td><button class="btn-default btn-sm" (click)="moveUpQuestion(q.question.sequence_number)"><i class="fas fa-chevron-up fa-lg"></i></button></td>
           <td><button class="btn-info btn-sm" (click)="editQuestion(q.question.sequence_number)"><i class="fas fa-pencil-alt fa-lg"></i></button></td>
@@ -40,6 +42,14 @@
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Question"
              required [(ngModel)]="questionData.text_value" name="formQuestionText">
+
+        <span>Question type: </span>
+        <select name="formQuestionType" [(ngModel)]="questionData.question_type_id">
+          <option *ngFor="let item of questionTypes" value="{{item.question_type_id}}">
+            {{item.type_name}}
+          </option>
+        </select>
+
     </div>
 
 
