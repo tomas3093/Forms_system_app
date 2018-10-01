@@ -22,17 +22,7 @@ export class FormEditorComponent implements OnInit {
   questionTypes: IFormQuestionType[]; // Array of all question types
 
   constructor(private dataApiService: DataApiService) {
-
-    this.formData = new IForm();
-    this.questionData = new IFormQuestion();
-    this.optionData = new IFormOption();
-
-    this.questions = [];
-    this.options = [];
-
-    this.questionEditorEnabled = false;
-    this.optionEditorEnabled  = false;
-
+    this.editorReset();
   }
 
   ngOnInit(): void {
@@ -43,6 +33,22 @@ export class FormEditorComponent implements OnInit {
         result => this.questionTypes = result,
         error => console.log(error)
       )
+  }
+
+
+  /**
+   * Cleans and resets form editor fields
+   */
+  editorReset(): void {
+    this.formData = new IForm();
+    this.questionData = new IFormQuestion();
+    this.optionData = new IFormOption();
+
+    this.questions = [];
+    this.options = [];
+
+    this.questionEditorEnabled = false;
+    this.optionEditorEnabled  = false;
   }
 
 
@@ -245,5 +251,36 @@ export class FormEditorComponent implements OnInit {
       this.options[sequence_number].sequence_number = sequence_number;
       this.options[sequence_number2].sequence_number = sequence_number2;
     }
+  }
+
+
+  /**
+   * Submits entire form to DB
+   */
+
+  submit() : void {
+
+    // Is form data valid
+   if (this.formData.name !== '') {
+     // INSERT TO DB
+
+     // FORM
+     this.dataApiService.addForm(this.formData)
+       .subscribe(
+         result => console.log(result),
+         error => console.log(error)
+       );
+
+
+     // TODO Dokoncit inserty ostatnych prvkov formulara:
+     // FORM QUESTIONS
+
+
+     // FORM OPTIONS
+
+
+     // Form editor reset
+     this.editorReset();
+   }
   }
 }

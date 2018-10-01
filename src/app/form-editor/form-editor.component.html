@@ -109,3 +109,12 @@
   </div>
 </div>
 
+
+<div class="btn-group">
+  <button type="button" class="btn btn-primary"
+          (click)="submit()"
+          [hidden]="formData.name === '' || questions.length === 0">
+    Submit
+  </button>
+</div>
+

@@ -42,7 +42,10 @@ export class IForm {
 
   constructor() {
     this.form_id = null;
-    this.user_id = null;
+
+    // TODO Just for debug purposes
+    this.user_id = 1;
+
     this.name = '';
     this.created = null;
   }}
